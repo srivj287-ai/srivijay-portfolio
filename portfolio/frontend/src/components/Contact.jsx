@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
-const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api/send-email`
+  : "/api/send-email";
 
 const initialForm = { name: "", email: "", subject: "", message: "" };
 
@@ -14,6 +16,7 @@ export default function Contact() {
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (status === "error") setStatus("idle");
   };
 
   const handleSubmit = async (e) => {
@@ -22,24 +25,24 @@ export default function Contact() {
     setErrorMsg("");
 
     try {
-      const res = await fetch(`${BACKEND_URL}/api/contact`, {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || "Something went wrong.");
+        throw new Error(data.error || "Failed to send message. Please try again.");
       }
 
       setStatus("success");
       setForm(initialForm);
     } catch (err) {
-      // In local offline mode or without backend active, still display friendly feedback
-      setStatus("success");
-      setForm(initialForm);
+      console.error("Contact form error:", err);
+      setStatus("error");
+      setErrorMsg(err.message || "Failed to send message. Please try again.");
     }
   };
 

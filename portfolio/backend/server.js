@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/contact", contactRoutes);
+app.use("/api/send-email", contactRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

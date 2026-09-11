@@ -58,6 +58,26 @@ router.post("/", (req, res) => {
 
     console.log(`[Contact] New message from ${newMessage.name} <${newMessage.email}>`);
 
+    // Send email via Resend if API key is configured
+    if (process.env.RESEND_API_KEY) {
+      try {
+        const { Resend } = require("resend");
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const fromEmail = process.env.RESEND_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";
+        const toEmail = process.env.CONTACT_TO_EMAIL || "srivj287@gmail.com";
+        await resend.emails.send({
+          from: fromEmail,
+          to: [toEmail],
+          replyTo: `${newMessage.name} <${newMessage.email}>`,
+          subject: `[Portfolio] ${newMessage.subject}`,
+          text: `New message from ${newMessage.name} (${newMessage.email}):\n\n${newMessage.message}`,
+        });
+        console.log(`[Contact] Resend email dispatched to ${toEmail}`);
+      } catch (emailErr) {
+        console.error("[Contact] Resend email error:", emailErr);
+      }
+    }
+
     res.status(201).json({
       success: true,
       message: "Your message has been received. I'll get back to you soon!",
