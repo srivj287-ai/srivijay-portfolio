@@ -88,14 +88,17 @@ module.exports = async function handler(req, res) {
     const cleanMessage = message.trim();
 
     // 4. Check RESEND_API_KEY
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey =
+      process.env.RESEND_API_KEY ||
+      process.env.RESEND_KEY ||
+      process.env.VITE_RESEND_API_KEY;
     if (!apiKey) {
       console.error(
         '[API /api/send-email] ERROR: RESEND_API_KEY environment variable is not defined on Vercel.'
       );
       return res.status(500).json({
         success: false,
-        error: 'Server email service is not configured (missing RESEND_API_KEY).',
+        error: 'Server email service is not configured (missing RESEND_API_KEY on Vercel).',
       });
     }
 
