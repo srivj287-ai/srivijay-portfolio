@@ -1,0 +1,9 @@
+{
+  "name": "srivijay-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd portfolio/frontend && npm install && npm run build",
+    "dev": "cd portfolio/frontend && npm run dev"
+  }
+}

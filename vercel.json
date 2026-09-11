@@ -1,0 +1,18 @@
+{
+  "buildCommand": "cd portfolio/frontend && npm install && npm run build",
+  "outputDirectory": "portfolio/frontend/dist",
+  "rewrites": [
+    {
+      "source": "/favicon.ico",
+      "destination": "/favicon.ico"
+    },
+    {
+      "source": "/favicon.svg",
+      "destination": "/favicon.svg"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
