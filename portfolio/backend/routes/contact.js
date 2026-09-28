@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 });
 
 // POST new contact message
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
 

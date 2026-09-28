@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import profileImg from "../assets/profile.jpg";
 
 export default function Resume() {
   const ref = useRef(null);
@@ -71,14 +72,21 @@ export default function Resume() {
           className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 shadow-sm text-slate-800"
         >
           {/* Header */}
-          <div className="border-b-2 border-slate-100 pb-6 mb-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-start gap-4">
-            <div>
-              <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-1">
-                SRIVIJAY B
-              </h1>
-              <p className="font-display text-base sm:text-lg font-medium text-blue-600 tracking-wide">
-                Computer Science & Engineering Student
-              </p>
+          <div className="border-b-2 border-slate-100 pb-6 mb-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4">
+            <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 text-center sm:text-left">
+              <img
+                src={profileImg}
+                alt="Srivijay B"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover object-top border-2 border-blue-100 shadow-sm shrink-0"
+              />
+              <div>
+                <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-1">
+                  SRIVIJAY B
+                </h1>
+                <p className="font-display text-base sm:text-lg font-medium text-blue-600 tracking-wide">
+                  Computer Science & Engineering Student
+                </p>
+              </div>
             </div>
             <div className="flex flex-col sm:items-end gap-1.5 text-xs text-slate-600 font-mono">
               <span className="inline-flex items-center gap-2">

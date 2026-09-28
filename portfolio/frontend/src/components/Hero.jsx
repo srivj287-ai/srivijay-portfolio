@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import profileImg from "../assets/profile.jpg";
 
 const floatingTags = [
   { label: "React.js", x: "8%", y: "22%", delay: 0 },
@@ -71,6 +72,32 @@ export default function Hero() {
         animate="show"
         className="relative z-10 text-center max-w-3xl mx-auto px-6 py-12"
       >
+        {/* Profile Avatar with subtle glow ring */}
+        <motion.div variants={item} className="flex justify-center mb-6">
+          <div className="relative group">
+            {/* Ambient blue glow aura */}
+            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-blue-600 via-indigo-500 to-sky-400 opacity-60 blur-md group-hover:opacity-90 transition-opacity duration-500 group-hover:duration-200 animate-pulse-slow" />
+
+            {/* Avatar frame */}
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-white ring-2 ring-blue-500/30 overflow-hidden shadow-xl">
+              <img
+                src={profileImg}
+                alt="Srivijay B"
+                className="w-full h-full object-cover object-top rounded-full transition-transform duration-500 group-hover:scale-105"
+                loading="eager"
+              />
+            </div>
+
+            {/* Active status indicator */}
+            <div
+              className="absolute bottom-1 right-1 flex items-center justify-center w-6 h-6 rounded-full bg-white ring-2 ring-white shadow-md"
+              title="Available for projects & internships"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
+          </div>
+        </motion.div>
+
         {/* Status badge */}
         <motion.div variants={item} className="flex justify-center mb-6">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 border border-blue-200 rounded-full text-xs font-mono text-blue-800 shadow-xs">

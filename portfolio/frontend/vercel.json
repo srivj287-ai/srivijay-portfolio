@@ -12,6 +12,10 @@
       "destination": "/favicon.svg"
     },
     {
+      "source": "/profile.jpg",
+      "destination": "/profile.jpg"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },
